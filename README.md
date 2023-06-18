@@ -17,13 +17,13 @@ A Moirai can have 5 different states:
 The following example is just waiting for some random time, keeping the builtin led on while waiting.
 
 To use a Moirai, you need to create a variable:
-```
+```c++
 Moirai randomWait(randomWaitCB);
 ```
 
 The corresponding logic, where the reactions to the state changes are defined, is in the callback function. Here, when the Moirai begins, it changes it planned end time with a random duration, and turn on the built in led.
 When it ends (the planned end time is passed), or if it is explicitely stopped, the built in led is turned off.
-```
+```c++
 void randomWaitCB(Moirai& moirai) {
   switch(moirai.getState()) {
     case Moirai::State::BEGINNING:
@@ -39,7 +39,7 @@ void randomWaitCB(Moirai& moirai) {
 
 At some point the Moirai has to begin. Here it is simply done in the setup function. It may happen in another Moirai, or comes from an external input like a button...
 
-```
+```c++
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   randomWait.begin();
@@ -48,7 +48,7 @@ void setup() {
 
 In the loop function, you have to call all the Moirais so they can be updated when the time passes.
 
-```
+```c++
 void loop() {
   randomWait.checkTime();
 }
@@ -59,7 +59,7 @@ void loop() {
 A periodic Moirai gets called regularly. At creation, you can pass the period, that is the duration between calls.
 
 Here is how to create a periodic Moirai which period is 1 second:
-```
+```c++
 PeriodicMoirai blinker(blinkCB, 1000);
 ```
 
@@ -69,7 +69,7 @@ The callback is called every period, with a Moirai in the ONGOING state.
 
 To chain Moirais, that is having callback beginning or stopping other Moirais. The only issue here is to have the variable already defined. You may put all the Moirai variable declarations before the callback functions:
 
-```
+```c++
 Moirai randomWait(randomWaitCB);
 PeriodicMoirai elevatorLeds(elevatorCB, 100);
 
