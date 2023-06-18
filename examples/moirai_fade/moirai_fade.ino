@@ -15,10 +15,11 @@
 */
 #include <moirai.h>
 
+PeriodicMoirai fader(fadeCB, 40);
+
 const int led = 9;     // the PWM pin the LED is attached to
 int brightness;    // how bright the LED is
 int fadeAmount;    // how many points to fade the LED by
-
 
 void fadeCB(Moirai& moirai) {
   switch (moirai.getState()) {
@@ -49,8 +50,6 @@ void fadeCB(Moirai& moirai) {
     } 
   }
 }
-
-PeriodicMoirai fader(fadeCB, 40);
 
 // the setup function runs once when you press reset or power the board
 void setup() {

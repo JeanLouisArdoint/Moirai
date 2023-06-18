@@ -1,7 +1,7 @@
 /*
   Blink with Moirai
 
-  Turns an LED on for one second, then off for one second, repeatedly.
+  Turns a LED on for one second, then off for one second, repeatedly.
 
   Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
   it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
@@ -15,6 +15,8 @@
   The code is ready if you want to blink for a duration, or if you want to stop it at some point.
 */
 #include <moirai.h>
+
+PeriodicMoirai blinker(blinkCB, 1000); // blink every sec
 
 boolean light;
 void blinkCB(Moirai& moirai) {
@@ -38,7 +40,6 @@ void blinkCB(Moirai& moirai) {
   }
 }
 
-PeriodicMoirai blinker(blinkCB, 1000); // blink every sec
 
 // the setup function runs once when you press reset or power the board
 void setup() {
